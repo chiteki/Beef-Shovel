@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+    <title>Bruh</title>
+</head>
+
+<body>
+    <div id = "headerBox">
+        <span id = "title"> 
+            *-----------------------------------------------------------------------------------*
+            |██████╗░███████╗███████╗███████╗  ░██████╗██╗░░██╗░█████╗░██╗░░░██╗███████╗██╗░░░░░|
+            |██╔══██╗██╔════╝██╔════╝██╔════╝  ██╔════╝██║░░██║██╔══██╗██║░░░██║██╔════╝██║░░░░░|
+            |██████╦╝█████╗░░█████╗░░█████╗░░  ╚█████╗░███████║██║░░██║╚██╗░██╔╝█████╗░░██║░░░░░|
+            |██╔══██╗██╔══╝░░██╔══╝░░██╔══╝░░  ░╚═══██╗██╔══██║██║░░██║░╚████╔╝░██╔══╝░░██║░░░░░|
+            |██████╦╝███████╗███████╗██║░░░░░  ██████╔╝██║░░██║╚█████╔╝░░╚██╔╝░░███████╗███████╗|
+            |╚═════╝░╚══════╝╚══════╝╚═╝░░░░░  ╚═════╝░╚═╝░░╚═╝░╚════╝░░░░╚═╝░░░╚══════╝╚══════╝|
+            *-----------------------------------------------------------------------------------*
+        </span>
+    </div>
+
+    <div class="mainContainer">
+        <div class="craftingInventory">
+            <table class="craftingGrid">
+                <tr class="craftingRow">
+                    <td class="craftingBox">
+                        <span class="craftingBoxInner" id="box_1_1">
+
+                        </span>
+                    </td>
+                    <td class="craftingBox">
+                        <span class="craftingBoxInner" id="box_1_2">
+                        </span>
+                    </td>
+                    <td class="craftingBox">
+                        <span class="craftingBoxInner" id="box_1_3">
+                        </span>
+                    </td>
+                </tr>
+                <tr class="craftingRow">
+                    <td class="craftingBox">
+                        <span class="craftingBoxInner" id="box_2_1">
+
+                        </span>
+                    </td>
+                    <td class="craftingBox">
+                        <span class="craftingBoxInner" id="box_2_2">
+                            <span class="craftingBoxInnerImage">
+                                <img class="item icon" id="beef1" src="Raw_Beef_JE4_BE3.webp">
+                            </span>
+                        </span>
+                    </td>
+                    <td class="craftingBox">
+                        <span class="craftingBoxInner" id="box_2_3">
+                        </span>
+                    </td>
+                </tr>
+                <tr class="craftingRow">
+                    <td class="craftingBox">
+                        <span class="craftingBoxInner" id="box_3_1">
+                        </span>
+                    </td>
+                    <td class="craftingBox">
+                        <span class="craftingBoxInner" id="box_3_2">
+                        </span>
+                    </td>
+                    <td class="craftingBox">
+                        <span class="craftingBoxInner" id="box_3_3">
+                        </span>
+                    </td>
+                </tr>
+            </table>
+            <span>
+                <img class="icon" src="png.webp">
+            </span>
+            <span class="craftingOutput">
+                <span class="craftingBoxInnerLarge">
+                    <span class="craftingBoxInnerImage">
+                        <img class="item icon" id = "" src="Iron_Shovel_JE3_BE2.webp">
+                    </span>
+                </span>
+            </span>
+        </div>
+
+        <button id = 'heat'> HEAT </button>
+        <button id = 'heatnt'> HEATN'T (cold) </button>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+        let current_slot = null;
+    let status_click = false;
+    let current_itemId = null;
+    let current_itemType = null;
+    let current_itemValue = null;
+
+    const items = document.querySelectorAll('.item');
+
+    items.forEach((item) => {
+    item.addEventListener('click', moveItem);
+    item.addEventListener('contextmenu', moveItem);
+    item.setAttribute('draggable', false);
+    });
+
+    //if heat button is clicked then change image of the item to steak_je4_be3
+    document.getElementById('heat').addEventListener('click', function() {
+        let item = document.getElementById('beef1');
+        item.src = 'Steak_JE4_BE3.webp';
+    });
+
+    document.getElementById('heatnt').addEventListener('click', function() {
+        let item = document.getElementById('beef1');
+        item.src = 'Raw_Beef_JE4_BE3.webp';
+    });
+
+    function moveItem() {
+        event.preventDefault();
+        const item = this;
+        let waitItem = null;
+
+        let ghostItem = item.cloneNode(true);
+        ghostItem.setAttribute('class', 'ghostItem');
+        item.classList.add('invisible');
+
+        let shiftX = ghostItem.getBoundingClientRect().left + 20;
+        let shiftY = ghostItem.getBoundingClientRect().top + 20;
+
+        ghostItem.style.position = 'absolute';
+        ghostItem.style.zIndex = 1000;
+        document.body.append(ghostItem);
+
+        ghostItem.onclick = function (event) {
+            if (current_itemId && current_itemId != item.parentNode.id) {
+                let area = document.getElementById(current_itemId);
+                let free_space = !!!area.firstElementChild;
+
+                if (free_space) {
+                    area.append(item);
+                } else {
+                    item.parentNode.append(area.firstElementChild);
+                    area.append(item);
+                }
+
+            }
+            item && item.classList.remove('invisible');
+            ghostItem.remove();
+            status_click = !status_click;
+        };
+
+        status_click = !status_click;
+
+        if (status_click) {
+            moveAt(event.pageX, event.pageY);
+        }
+
+        function moveAt(pageX, pageY) {
+            ghostItem.style.left = pageX - shiftX + 'px';
+            ghostItem.style.top = pageY - shiftY + 'px';
+        }
+
+        function onMouseMove(event) {
+            if (status_click) {
+                moveAt(event.pageX, event.pageY);
+            }
+            ghostItem.hidden = true;
+            let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+            ghostItem.hidden = false;
+
+            if (!elemBelow) return;
+            let droppableBelow = elemBelow.closest('.craftingBoxInner');
+            if (current_slot != droppableBelow) {
+                if (current_slot) {
+                    leaveDroppable(current_slot);
+                }
+                current_slot = droppableBelow;
+                if (current_slot) {
+                    enterDroppable(current_slot);
+                }
+            }
+        }
+
+        document.addEventListener('mousemove', onMouseMove);
+    }
+
+    function enterDroppable(elem) {
+        current_itemId = elem.id;
+        if (elem.firstElementChild) {
+            current_itemType = elem.firstElementChild.id;
+            child = elem.firstElementChild;
+            current_itemValue = child.lastElementChild.innerHTML;
+        }
+    }
+
+    function leaveDroppable(elem) {
+        current_itemId = null;
+        current_itemType = null;
+        current_itemValue = null;
+        free_space = false;
+    }
+</script>

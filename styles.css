@@ -1,0 +1,133 @@
+body {
+    background-color: #101038;
+}
+
+#title {
+    display: inline-block;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: monospace,-webkit-pictograph;
+    line-height: 1;
+    font-size: 16px;
+    color: #fff;
+}
+
+#headerBox {
+    text-align: center;
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.icon {
+    width: 32px;
+    height: 32px;
+    padding: 2px;
+    margin: -2px;
+}
+
+.ghostItem{
+    width: 32px;
+}
+
+.craftingInventory {
+    width: fit-content;
+    /* height: 128px; */
+    background: #c6c6c6;
+    border-radius: 3px;
+    border-left: 3px solid #DBDBDB;
+    border-top: 3px solid #DBDBDB;
+    border-right: 3px solid #5b5b5b;
+    border-bottom: 3px solid #5b5b5b;
+    padding: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    box-sizing: inherit;
+    align-items: center;
+    gap: 6px;
+}
+
+.craftingRow {
+    height: 36px;
+}
+
+.craftingGrid {
+    border-spacing: 0;
+}
+
+.craftingBox {
+    display: inline-block;
+    border: none;
+    padding: 0;
+}
+
+.craftingBoxInner {
+    position: relative;
+    display: inline-block;
+    background: #8b8b8b no-repeat center center / 32px 32px;
+    border: 2px solid;
+    border-color: #373737 #FFF #FFF #373737;
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    line-height: 1;
+    text-align: left;
+    vertical-align: bottom;
+    box-sizing: content-box;
+}
+
+.craftingBoxInner:hover {
+    background-color: #a6a6a6;
+}
+
+.craftingBoxInnerImage:hover {
+    background-color: #a6a6a6;
+}
+
+.craftingBoxInnerImage {
+    position: relative;
+    display: block;
+    background-origin: content-box;
+    background-clip: content-box;
+    width: 32px;
+    height: 32px;
+    top: -2px;
+    left: -2px;
+    padding: 2px;
+}
+
+.craftingBoxInnerLarge {
+    position: relative;
+    display: inline-block;
+    background: #8b8b8b no-repeat center center / 32px 32px;
+    border: 2px solid;
+    border-color: #373737 #FFF #FFF #373737;
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    line-height: 1;
+    text-align: left;
+    vertical-align: bottom;
+    box-sizing: content-box;
+    padding: 8px;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+#heat {
+    background-color: #ff0000;
+}
+
+#heatnt {
+    background-color: #0000ff;
+}
